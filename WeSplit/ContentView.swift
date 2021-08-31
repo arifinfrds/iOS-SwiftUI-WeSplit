@@ -8,12 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    private let students = ["Harry", "Hermoine", "Ron"]
+    @State private var selectedStudentIndex = 0
     
     var body: some View {
-        Form {
-            ForEach(0..<30) { number in
-                Text("Hi \(number)")
+        VStack {
+            Picker("Select Students : ", selection: $selectedStudentIndex) {
+                ForEach(0 ..< students.count) {
+                    Text(self.students[$0])
+                }
             }
+            Text("You chose: Student # \(students[selectedStudentIndex])")
         }
     }
 }
