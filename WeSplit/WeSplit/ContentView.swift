@@ -16,22 +16,23 @@ struct ContentView: View {
     
     private var totalPerPerson: Double {
         let peopleCount = Double(numberOfPeople + 2)
-        let tipSelection = Double(tipPercentages[tipPercentageIndex])
-        let orderAmount = Double(checkAmount) ?? 0
-        
-        let tipValue = orderAmount / 100 * tipSelection
-        let grandTotal = orderAmount + tipValue
+        let grandTotal = calculateGrandTotal()
         let amountPerPerson = grandTotal / peopleCount
         
         return amountPerPerson
     }
     
     private var totalAmountForTheCheck: Double {
+        return calculateGrandTotal()
+    }
+    
+    private func calculateGrandTotal() -> Double {
         let tipSelection = Double(tipPercentages[tipPercentageIndex])
         let orderAmount = Double(checkAmount) ?? 0
         
         let tipValue = orderAmount / 100 * tipSelection
         let grandTotal = orderAmount + tipValue
+        
         return grandTotal
     }
     
