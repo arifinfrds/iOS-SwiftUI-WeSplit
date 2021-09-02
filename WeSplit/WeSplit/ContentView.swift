@@ -26,6 +26,15 @@ struct ContentView: View {
         return amountPerPerson
     }
     
+    private var totalAmountForTheCheck: Double {
+        let tipSelection = Double(tipPercentages[tipPercentageIndex])
+        let orderAmount = Double(checkAmount) ?? 0
+        
+        let tipValue = orderAmount / 100 * tipSelection
+        let grandTotal = orderAmount + tipValue
+        return grandTotal
+    }
+    
     var body: some View {
         NavigationView {
             Form {
@@ -51,6 +60,10 @@ struct ContentView: View {
                 
                 Section(header: Text("Amount per person")) {
                     Text("$\(totalPerPerson, specifier: "%.2f")")
+                }
+                
+                Section {
+                    Text("$\(totalAmountForTheCheck, specifier: "%.2f")")
                 }
             }
             .navigationBarTitle("WeSplit")
